@@ -154,3 +154,46 @@ Para instalar o mongoose no projeto executamos:
 ````
 npm install mongoose
 `````
+
+Obs.: não esquecer de importar no mongo essa nova dependência: 
+
+````
+const mongoose = require("mongoose")
+
+````
+
+<br />
+
+### String de Conexão
+<br />
+
+Para realizar a conexão com o servidor que está rodando localmente no seu computador, precisamos referenciar a string de conexão com o respectivo banco que iremos utilizar no projeto:
+
+<br />
+
+````
+mongoose.connect("mongodb://localhost:27017/reprograma", { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true 
+});
+
+````
+<br />
+Obs.: a porta padrão de comunicação do mongo é a 27017, e a informação contida após esse número é o nome do banco de dados.
+
+<br/>
+
+Para capturar o erro ou o sucesso na conexão, utilizamos a seguinte sintaxe:
+
+````
+//Conexão com o mongo
+
+let db = mongoose.connection;
+
+// Captura de erro ou sucesso na conexão
+
+db.on("error", console.log.bind(console, "connection error:"))
+db.once("open", function (){
+  console.log("conexão feita com sucesso.")
+})
+````
