@@ -79,27 +79,40 @@ Nós também vimos como utilizar o mongoShell e seus respectivos comandos para m
 
 <br />
 
-````
 Para criar ou chavear entre os bancos de dados existentes:
 
+````
 use <databaseName>
+````
 
 Para buscar todos os registros sem filtro algum utilizamos o comando find:
+<br/>
 
+```
 db.collectionName.find()
-
+```
 Para buscar registros a partir de um filtro:
+<br/>
 
+```
 db.collectionName.find({filtros})
-
+```
 Para inserir registros novos dentro do banco de dados:
+<br/>
 
+```
 db.collectionName.inserMany/insertOne({objeto a ser inserido})
-
+```
 Para atualizar registros dentro do banco de dados:
+<br/>
 
+```
 db.collectionName.updateMany/updateOne({filtros},{ $set: {campos a serem atualizados}})
+```
+Para remover regisros dentro do banco de dados:
+<br/>
 
-
+```
+db.collectionName.deleteOne/deleteMany({filtros})
 
 ````
