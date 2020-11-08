@@ -197,3 +197,17 @@ db.once("open", function (){
   console.log("conexão feita com sucesso.")
 })
 ````
+
+<br />
+
+### Scheema
+<br />
+
+Um esquema nada mais é do que a estrutura mapeada dos atributos da sua entidade. Ela é uma representação dos registros que estão salvos dentro do banco de dados, e é através dela que iremos realizar acesso ao banco.
+
+Um schema também pode ser comparado a um model, que dentro da estrutura MVC é a camada das suas classes/entidades do projeto.
+
+<br />
+
+![scheema](https://miro.medium.com/max/669/1*a_wbhL6GCgRMQ8uGnIc0cQ.png)
+
