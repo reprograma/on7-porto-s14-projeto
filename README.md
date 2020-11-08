@@ -315,7 +315,6 @@ DELETE /entidade
             return res.status(424).send({ message: err.message })
         }
     })
-
   }
 
 ````
