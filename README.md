@@ -200,7 +200,7 @@ db.once("open", function (){
 
 <br />
 
-### Scheema
+### Schema
 <br />
 
 Um esquema nada mais é do que a estrutura mapeada dos atributos da sua entidade. Ela é uma representação dos registros que estão salvos dentro do banco de dados, e é através dela que iremos realizar acesso ao banco.
@@ -211,3 +211,79 @@ Um schema também pode ser comparado a um model, que dentro da estrutura MVC é 
 
 ![scheema](https://miro.medium.com/max/669/1*a_wbhL6GCgRMQ8uGnIc0cQ.png)
 
+Segue abaixo um exemplo de Scheema visto nas aulas anteriores:
+
+````
+const mongoose = require('mongoose');
+
+//estrutura do seu model (atributos da sua entidade)
+
+const tarefasSchema = new mongoose.Schema({
+    id : { type : Number},
+    descricao: { type: String },
+    dataInclusao: { type: String },
+    concluido: { type: Boolean },
+    nomeColaboradora: { type: String }
+},{
+    //gera por padrão uma versão para cada atualização do documento
+
+    versionKey: false
+});
+
+// atribuindo o esquema a uma collection
+// estou definindo o nome da collection que irei salvar no banco
+
+const tarefas = mongoose.model('tarefas', tarefasSchema);
+
+// exportar o model para ser utilizado
+
+module.exports = tarefas;
+
+````
+
+<br/>
+
+Após definir o schema, devemos referenciá-lo na nossa controller e remover a referência do arquivo .json (apagá-lo também).
+
+Para isso, dentro da controller correspondente ao model:
+
+`````
+const <nomeDoSchema> = require('../models/<nomeDoSchema>');
+
+`````
+
+<br />
+
+### Implementação dos Métodos através da controller
+
+<br />
+
+Até o momento, vimos os métodos, find, insert, delete e update, mas, qual é a relação deles com os nossos métodos HTTP?
+
+<br/>
+
+![crud](https://acadgild.com/blog/wp-content/uploads/2017/02/MongoDB-CRUD-Operations.jpg)
+
+
+Basicamente, podemos relacionar os métodos http com os comandos do mongo:
+
+- INSERT / POST
+- UPDATE / PUT
+- DELETE / DELETE
+- FIND / GET
+
+Agora, alguns exemplos de implementação dos métodos http através das rotas:
+
+GET /entidade
+<br/>
+
+````
+    entidade.find(function(err, tarefas){
+        if(err) { 
+            res.status(500).send({ message: err.message })
+        }else{
+            res.status(200).send(tarefas);
+        }
+    })
+
+````
