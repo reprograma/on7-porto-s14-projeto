@@ -1,47 +1,112 @@
 const cursos = require('../models/cursos')
 
 const getAll = (req, res) => {
-    res.status(200).send({ message: "pegar todos os cursos"})
+    cursos.find(function (err, cursos) {
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send(cursos)
+        }
+    })
 }
 
 const getPorTurno = (req, res) => {
     const parametros = req.query
-    console.log(parametros)
-    res.status(200).send({ message: "pegar todos os cursos por turno"})
+    cursos.find(parametros, function (err, cursos) {
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send(cursos)
+        }
+    })
 }
 
 const getById = (req, res) => {
-    res.status(200).send({ message: "pegar todos os cursos por id"})
+    const id = req.params.id
+    cursos.find({ id }, function (err, cursos) {
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send(cursos)
+        }
+    })
 }
 
 const getBootcamps = (req, res) => {
-    res.status(200).send({ message: "pegar todos os cursos por que são do tipo bootcamp"})
+    cursos.find({ bootcamp: true }, function (err, cursos) {
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send(cursos)
+        }
+    })
 }
 
 const getCursosGratuitos = (req, res) => {
-    res.status(200).send({ message: "pegar todos os cursos que são gratuitos"})
+    const estado = req.params.estado
+    cursos.find({ estado, gratuito : true }, function (err, cursos) {
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send(cursos)
+        }
+    })
 }
 
 const getCursosPagos = (req, res) => {
-    res.status(200).send({ message: "pegar todos os cursos que são pagos"})
+    const estado = req.params.estado
+    cursos.find({ estado, gratuito : false }, function (err, cursos) {
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send(cursos)
+        }
+    })
 }
 
 const postCurso = (req, res) => {
-    res.status(200).send({ message: "registrar um curso"})
+    let curso = new cursos(req.body)
+
+    curso.save(function(err){
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(201).send({ message : "curso incluído com sucesso"})
+        }
+    })
 }
 
 const deleteCurso = (req, res) => {
-    res.status(200).send({ message: "remover um curso"})
+    const id = req.params.id
+    cursos.deleteMany({ id }, function(err){
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send({ message : "curso removido com sucesso"})
+        }
+    })
 }
 
 const deleteCursosPorTurno = (req, res) => {
     const parametros = req.query
-    console.log(parametros)
-    res.status(200).send({ message: "deletar os cursos por turnos"})
+    cursos.deleteMany(parametros, function(err){
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send({ message : "cursos removidos com sucesso"})
+        }
+    })
 }
 
 const putCurso = (req, res) => {
-    res.status(200).send({ message: "atualizar um curso"})
+    const id = req.params.id
+    cursos.updateMany({ id }, { $set : req.body }, { upsert : true }, function(err){
+        if (err) {
+            res.status(500).send({ message: err.message })
+        } else {
+            res.status(200).send({ message : "curso atualizado com sucesso"})
+        }
+    })
 }
 
 module.exports = {
