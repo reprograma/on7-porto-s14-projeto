@@ -278,12 +278,59 @@ GET /entidade
 <br/>
 
 ````
-    entidade.find(function(err, tarefas){
+    entidade.find(function(err, retorno){
         if(err) { 
             res.status(500).send({ message: err.message })
         }else{
-            res.status(200).send(tarefas);
+            res.status(200).send(retorno);
         }
     })
+
+````
+
+POST /entidade
+<br/>
+
+````
+    let entidade = new entidade(req.body)
+
+    entidade.save(function(err){
+        if(err) { 
+            res.status(500).send({ message: err.message })
+        }else{
+            res.status(201).send(entidade.toJSON())
+        }
+    })
+
+````
+
+DELETE /entidade
+<br/>
+
+````
+    entidade.deleteMany({ filtros }, function (err) {
+        if (!err) {
+            res.status(200).send({ message: 'removido com sucesso', status: "SUCCESS" })
+        }else{
+            return res.status(424).send({ message: err.message })
+        }
+    })
+
+  }
+
+````
+
+
+UPDATE /entidade
+<br/>
+
+````
+   entidade.updateMany({ filtros }, { $set : req.body }, function (err) {
+        if (err) {
+          res.status(500).send({ message: err.message })
+        }else{
+            res.status(200).send({ message: "Registro alterado com sucesso"})
+        }
+      })
 
 ````
