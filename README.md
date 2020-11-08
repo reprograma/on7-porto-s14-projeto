@@ -120,8 +120,37 @@ db.collectionName.deleteOne/deleteMany({filtros})
 Vimos também que quando incluímos um registro no mongo, ele gera um Id único, chamado Object_id, que nada mais é do que um identificador único gerado no momento que o registro é salvo no banco de dados, esse object id é composto pela data e hora que o registro foi incluído no banco. 
 
 <br />
-Vimos também que existem os GUI (Grapical User Interface), que é a interface gráfica que nos auxilia a manipular os dados de uma forma mais amigável, utilizamos o Robo3T.
+Descobrimos o GUI (Grapical User Interface), que é a interface gráfica que nos auxilia a manipular os dados de uma forma mais amigável, utilizamos o Robo3T.
 <br/>
 <br/>
 
 ![robo](https://blog.robomongo.org/content/images/2017/06/atlas_conn_v1.png)
+
+<br />
+
+## Integração com projeto Node.js
+<br />
+
+Anteriormente, nos projetos vistos até então vocês utilizavam um arquivo .json para representar o banco de dados, correto?
+
+Pensando na arquitetura de um sistema, precisamos que os dados não fiquem dentro da aplicação, e sim em uma camada destinado aos dados.
+
+<br />
+
+![banco1](https://usemobile.com.br/wp-content/uploads/2020/10/back-end-front-end.jpg)
+
+Para aplicar os conceitos aprendidos até então e alterar o nosso projeto para que ele busque os dados do banco de dados e NÃO mais do aquivo .json, realizamos os passos abaixo:
+
+
+<br />
+
+### Mongoose
+<br />
+
+Realizamos a instalação da dependência mongoose, que é a nossa interface da aplicação node.js para o banco de dados Mongo.
+
+Para instalar o mongoose no projeto executamos:
+
+````
+npm install mongoose
+`````
