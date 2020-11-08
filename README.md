@@ -115,4 +115,13 @@ Para remover regisros dentro do banco de dados:
 ```
 db.collectionName.deleteOne/deleteMany({filtros})
 
-````
+```
+
+Vimos também que quando incluímos um registro no mongo, ele gera um Id único, chamado Object_id, que nada mais é do que um identificador único gerado no momento que o registro é salvo no banco de dados, esse object id é composto pela data e hora que o registro foi incluído no banco. 
+
+<br />
+Vimos também que existem os GUI (Grapical User Interface), que é a interface gráfica que nos auxilia a manipular os dados de uma forma mais amigável, utilizamos o Robo3T.
+<br/>
+<br/>
+
+![robo](https://blog.robomongo.org/content/images/2017/06/atlas_conn_v1.png)
